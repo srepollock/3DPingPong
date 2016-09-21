@@ -59,6 +59,8 @@ public class ConsoleController {
 		registerCommand(repeatCmdName, repeatCommand, "Repeat last command.");
 		registerCommand("reload", reload, "Reload game.");
 		registerCommand("resetprefs", resetPrefs, "Reset & saves PlayerPrefs.");
+
+        registerCommand("background", background, "Change the background of the game using ARGB colors.");
 	}
 
 	void registerCommand(string command, CommandHandler handler, string help) {
@@ -200,6 +202,71 @@ public class ConsoleController {
 		PlayerPrefs.DeleteAll();
 		PlayerPrefs.Save();
 	}
+
+    void background(string[] args)
+    {
+        Debug.Log(args);
+        Debug.Log(args.Length);
+        if (args.Length >= 3)
+        {
+            GameObject bg = GameObject.Find("Background");
+            if (args.Length == 4)
+            {
+                bg.GetComponent<Renderer>().material.color = new Color(float.Parse(args[0]), float.Parse(args[1]), float.Parse(args[2]), float.Parse(args[3]));
+            } else if (args.Length == 3)
+            {
+                bg.GetComponent<Renderer>().material.color = new Color(float.Parse(args[0]), float.Parse(args[1]), float.Parse(args[2]), 1);
+            } else
+            {
+                appendLogLine("Incorrect number. Please enter again.");
+            }
+        } else if(args.Length == 1)
+        {
+            GameObject bg = GameObject.Find("Background");
+            switch (args[0])
+            {
+                case "black":
+                    bg.GetComponent<Renderer>().material.color = Color.black;
+                    break;
+                case "blue":
+                    bg.GetComponent<Renderer>().material.color = Color.blue;
+                    break;
+                case "clear":
+                    bg.GetComponent<Renderer>().material.color = Color.clear;
+                    break;
+                case "cyan":
+                    bg.GetComponent<Renderer>().material.color = Color.cyan;
+                    break;
+                case "gray":
+                    bg.GetComponent<Renderer>().material.color = Color.gray;
+                    break;
+                case "green":
+                    bg.GetComponent<Renderer>().material.color = Color.green;
+                    break;
+                case "grey":
+                    bg.GetComponent<Renderer>().material.color = Color.grey;
+                    break;
+                case "magenta":
+                    bg.GetComponent<Renderer>().material.color = Color.magenta;
+                    break;
+                case "red":
+                    bg.GetComponent<Renderer>().material.color = Color.red;
+                    break;
+                case "white":
+                    bg.GetComponent<Renderer>().material.color = Color.white;
+                    break;
+                case "yellow":
+                    bg.GetComponent<Renderer>().material.color = Color.yellow;
+                    break;
+                default:
+                    appendLogLine("Accepted colors only: black, blue, clear, cyan, gray, green, grey, magenta, red, white, yellow");
+                    break;
+            }
+        } else
+        {
+            appendLogLine("Please insert 3-4 numbers.\n ie: 24 48 112 or 0.4 22 61 34 (ARGB or RGB (A is 1))\n\nOr it may be the name of a color: black, blue, clear, cyan, gray, green, grey, magenta, red, white, yellow");
+        }
+    }
 
 	#endregion
 }

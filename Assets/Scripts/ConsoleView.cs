@@ -31,7 +31,7 @@ public class ConsoleView : MonoBehaviour {
 
 	void Update() {
 		//Toggle visibility when tilde key pressed
-		if (Input.GetKeyUp("`")) {
+		if (Input.GetKeyUp("`") || Input.GetAxis("Xbox Middle Button") > 0) {
 			toggleVisibility();
 		}
 
