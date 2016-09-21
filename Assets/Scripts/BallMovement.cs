@@ -72,7 +72,9 @@ public class BallMovement : MonoBehaviour {
 			}
 			respawn ();
 		}
-		// Check scores
+		if (checkScores ()) {
+			LoadOnClick.LoadSceneNoImage (3);
+		}
 	}
 
 	float hitRacketFactor(Vector3 ballPos, Vector3 racketPos, float racketHeight) {
@@ -88,14 +90,13 @@ public class BallMovement : MonoBehaviour {
 	}
 
 	void clearScore() {
-//		playerOne.score = 0;
-//		playerTwo.score = 0;
-//		playerComp.score = 0;
 		p1Text.text = "Score: 0";
 		p2Text.text = "Score: 0";
 	}
 
-	void checkScores() {
-
+	bool checkScores() {
+		if (playerOne.score >= 10 || playerTwo.score >= 10 || playerComp.score >= 10)
+			return true;
+		return false;
 	}
 }

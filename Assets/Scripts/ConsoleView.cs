@@ -31,7 +31,7 @@ public class ConsoleView : MonoBehaviour {
 
 	void Update() {
 		//Toggle visibility when tilde key pressed
-		if (Input.GetKeyUp("c")) {
+		if (Input.GetKeyUp("`")) {
 			toggleVisibility();
 		}
 

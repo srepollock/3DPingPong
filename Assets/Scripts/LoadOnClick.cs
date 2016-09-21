@@ -10,6 +10,10 @@ public class LoadOnClick : MonoBehaviour {
 		Application.LoadLevel (level);
 	}
 
+	public static void LoadSceneNoImage(int level) {
+		Application.LoadLevel(level);
+	}
+
 	public void QuitGame() {
 		Application.Quit ();
 	}
