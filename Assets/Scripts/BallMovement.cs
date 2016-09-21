@@ -21,7 +21,7 @@ public class BallMovement : MonoBehaviour {
 	void Start () {
 		rb = GetComponent<Rigidbody> ();
 		if (rb != null) {
-			rb.velocity = new Vector3(Random.Range(-1f,1f),Random.Range(-0.4f,0.4f)) * iSpeed;
+			rb.velocity = new Vector3(-1, 0) * iSpeed;
 			curSpeed = iSpeed;
 		}
 		GameObject p1Score = GameObject.Find ("P1Score");
@@ -86,7 +86,7 @@ public class BallMovement : MonoBehaviour {
 //		Instantiate (gameObject, new Vector3(0f, 0f, 0f), transform.rotation);
 //		Destroy(gameObject);
 		transform.position = new Vector3(0f, 0f, 0f);
-		rb.velocity = new Vector3(-1f,-0.15f) * iSpeed;
+		rb.velocity = Vector3.right * iSpeed;
 		curSpeed = iSpeed;
 	}
 
