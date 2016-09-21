@@ -17,6 +17,10 @@ public class PlayerOne: MonoBehaviour {
 			transform.Translate(Vector3.up * speed * Time.deltaTime);
 		} else if (Input.GetKey (KeyCode.S)) {
 			transform.Translate(-Vector3.up * speed * Time.deltaTime);
+		} else if (Input.GetAxis("Vertical") > 0) {
+			transform.Translate(Vector3.up * speed * Time.deltaTime);
+		} else if (Input.GetAxis("Vertical") < 0) {
+			transform.Translate(-Vector3.up * speed * Time.deltaTime);
 		}
 	}
 
