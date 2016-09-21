@@ -12,6 +12,7 @@ public class BallMovement : MonoBehaviour {
 	private float curSpeed;
 	private PlayerOne playerOne;
 	private PlayerTwo playerTwo;
+	private PlayerComp playerComp;
 	private Text p1Text;
 	private Text p2Text;
 
@@ -19,7 +20,7 @@ public class BallMovement : MonoBehaviour {
 	void Start () {
 		rb = GetComponent<Rigidbody> ();
 		if (rb != null) {
-			rb.velocity = Vector3.right * iSpeed;
+			rb.velocity = new Vector3(-1f,-0.15f) * iSpeed;
 			curSpeed = iSpeed;
 		}
 		GameObject p1Score = GameObject.Find ("P1Score");
@@ -28,14 +29,18 @@ public class BallMovement : MonoBehaviour {
 		GameObject p2Score = GameObject.Find ("P2Score");
 		p2Text = p2Score.GetComponent<Text> ();
 		playerTwo = GameObject.Find ("PlayerTwo").GetComponent<PlayerTwo>();
+		if (playerTwo == null) {
+			playerComp = GameObject.Find ("PlayerTwo").GetComponent<PlayerComp> ();
+			playerTwo = new PlayerTwo ();
+		} else {
+			playerComp = new PlayerComp ();
+		}
 		clearScore ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-//		Vector3 cval = rb.velocity;
-//		Vector3 tval = cval.normalized * cSpeed;
-//		rb.velocity = Vector3.Lerp (cval, tval, Time.deltaTime * sFactor);
+		
 	}
 
 	void OnCollisionEnter(Collision col) {
@@ -58,10 +63,16 @@ public class BallMovement : MonoBehaviour {
 			p1Text.text = "Score: " + playerOne.score;
 			respawn ();
 		} else if (col.gameObject.name == "Left Wall") {
-			playerTwo.addScore ();
-			p2Text.text = "Score: " + playerTwo.score;
+			if (playerTwo != null) {
+				playerTwo.addScore ();
+				p2Text.text = "Score: " + playerTwo.score;
+			} else if (playerComp != null) {
+				playerComp.addScore ();
+				p2Text.text = "Score: " + playerComp.score;
+			}
 			respawn ();
 		}
+		// Check scores
 	}
 
 	float hitRacketFactor(Vector3 ballPos, Vector3 racketPos, float racketHeight) {
@@ -72,14 +83,19 @@ public class BallMovement : MonoBehaviour {
 //		Instantiate (gameObject, new Vector3(0f, 0f, 0f), transform.rotation);
 //		Destroy(gameObject);
 		transform.position = new Vector3(0f, 0f, 0f);
-		rb.velocity = Vector3.right * iSpeed;
+		rb.velocity = new Vector3(-1f,-0.15f) * iSpeed;
 		curSpeed = iSpeed;
 	}
 
 	void clearScore() {
-		playerOne.score = 0;
-		playerTwo.score = 0;
+//		playerOne.score = 0;
+//		playerTwo.score = 0;
+//		playerComp.score = 0;
 		p1Text.text = "Score: 0";
 		p2Text.text = "Score: 0";
+	}
+
+	void checkScores() {
+
 	}
 }
