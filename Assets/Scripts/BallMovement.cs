@@ -7,6 +7,7 @@ public class BallMovement : MonoBehaviour {
 	public float iSpeed;
 	public float cSpeed;
 	public float sFactor;
+	public const int WINNING_SCORE = 5;
 
 	private Rigidbody rb;
 	private float curSpeed;
@@ -20,7 +21,7 @@ public class BallMovement : MonoBehaviour {
 	void Start () {
 		rb = GetComponent<Rigidbody> ();
 		if (rb != null) {
-			rb.velocity = new Vector3(-1f,-0.15f) * iSpeed;
+			rb.velocity = new Vector3(Random.Range(-1f,1f),Random.Range(-0.4f,0.4f)) * iSpeed;
 			curSpeed = iSpeed;
 		}
 		GameObject p1Score = GameObject.Find ("P1Score");
@@ -95,7 +96,9 @@ public class BallMovement : MonoBehaviour {
 	}
 
 	bool checkScores() {
-		if (playerOne.score >= 10 || playerTwo.score >= 10 || playerComp.score >= 10)
+		if (playerOne.score >= WINNING_SCORE 
+			|| playerTwo.score >= WINNING_SCORE 
+			|| playerComp.score >= WINNING_SCORE)
 			return true;
 		return false;
 	}
