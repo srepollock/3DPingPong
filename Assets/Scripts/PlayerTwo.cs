@@ -17,6 +17,10 @@ public class PlayerTwo : MonoBehaviour {
 			transform.Translate(Vector3.up * speed * Time.deltaTime);
 		} else if (Input.GetKey (KeyCode.DownArrow)) {
 			transform.Translate(-Vector3.up * speed * Time.deltaTime);
+		} else if (Input.GetAxis("XBox Right Joy Stick") > 0) {
+			transform.Translate(Vector3.up * speed * Time.deltaTime);
+		} else if (Input.GetAxis("XBox Right Joy Stick") < 0) {
+			transform.Translate(-Vector3.up * speed * Time.deltaTime);
 		}
 	}
 
