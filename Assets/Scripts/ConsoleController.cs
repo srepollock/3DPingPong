@@ -52,10 +52,8 @@ public class ConsoleController {
 
 	public ConsoleController() {
 		//When adding commands, you must add a call below to registerCommand() with its name, implementation method, and help text.
-		registerCommand("babble", babble, "Example command that demonstrates how to parse arguments. babble [word] [# of times to repeat]");
 		registerCommand("echo", echo, "echoes arguments back as array (for testing argument parser)");
 		registerCommand("help", help, "Print this help.");
-		registerCommand("hide", hide, "Hide the console.");
 		registerCommand(repeatCmdName, repeatCommand, "Repeat last command.");
 		registerCommand("reload", reload, "Reload game.");
 		registerCommand("resetprefs", resetPrefs, "Reset & saves PlayerPrefs.");
